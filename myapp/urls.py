@@ -5,4 +5,5 @@ from django.conf import settings
 app_name = 'myapp'
 urlpatterns = [
     path('', home,name='home'),
+    
 ] 

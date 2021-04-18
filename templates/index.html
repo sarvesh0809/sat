@@ -15,6 +15,7 @@
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
     <link rel="stylesheet" href="{% static 'style.css' %} ">
+
     <title>Sentiment Analysis </title>
 </head>
 <style>
@@ -80,10 +81,43 @@
         color: crimson;
     }
 
-    
+    .table-dark {
+        --bs-table-bg: #202224;
+        --bs-table-striped-bg: rgb(22, 22, 37);
+        --bs-table-striped-color: #fff;
+        --bs-table-active-bg: #373b3e;
+        --bs-table-active-color: #fff;
+        --bs-table-hover-bg: #323539;
+        --bs-table-hover-color: #fff;
+        color: #fff;
+        border-color: #373737;
+    }
+
+    #myBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: darkorange;
+        color: white;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    #myBtn:hover {
+        background-color: #555;
+    }
+
+
 </style>
 
 <body>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">^</button>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">SAT</a>
@@ -190,27 +224,29 @@
                         data: {
                             labels: [{% for y in lis %} "{{y}}", {% endfor %}],
                     datasets: [{
-                        label: ' Sentiment Analysis Range:-1 to 1',
+                        label: ' Sentiment Analysis:',
 
                         data: [{% for x in scatter_x %} {{ x }}, {% endfor %}],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)',
-                            'rgba(54, 162, 235, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
-                            'rgba(75, 192, 192, 0.8)',
-                            'rgba(153, 102, 255, 0.8)',
-                            'rgba(255, 159, 64, 0.8)'
-                        ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
+                        pointRadius: 5,
+                            pointHoverRadius: 7,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.8)',
+                                    'rgba(54, 162, 235, 0.8)',
+                                    'rgba(255, 206, 86, 0.8)',
+                                    'rgba(75, 192, 192, 0.8)',
+                                    'rgba(153, 102, 255, 0.8)',
+                                    'rgba(255, 159, 64, 0.8)'
+                                ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
 
-                            ],
-                                borderWidth: 1,
+                                    ],
+                                        borderWidth: 1,
                                 
                                 }]
                             },
@@ -254,11 +290,50 @@
 
         </div>
 
+        {% if something %}
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-sm">
+                <tr>
+                    <td style="text-align: center;"><strong>Sr.no</strong></td>
+                    <td style="text-align: center;"><strong>Data</strong></td>
+                    <td style="text-align: center;"><strong>Analysis</strong></td>
+                    <td style="text-align: center;"><strong>value</strong></td>
+                </tr>
+                {% for i in lst %}
+                <tr>
+                    <td>{{i.item1}}</td>
+                    <td>{{i.item4}}</td>
+                    <td>{{i.item3}}</td>
+                    <td>{{i.item2}}</td>
+                </tr>
+                {% endfor %}
 
 
+            </table>
+        </div>
+        {% endif %}
 
 
+        <script>
+            var mybutton = document.getElementById("myBtn");
 
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () { scrollFunction() };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
 
 
 
