@@ -3,7 +3,7 @@ sentimental analysis of any text
 
 1. git clone "link goes here"
 
-2. cd sat
+2. cd hinglish
 
 3. pip install -r requirements.txt
 
