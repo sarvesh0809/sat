@@ -3,10 +3,12 @@ sentimental analysis of any text
 
 1. git clone "link goes here"
 
-2. pip install -r requirements.txt
+2. cd sat
 
-3. python manage.py migrate
+3. pip install -r requirements.txt
 
-4. python manage.py runserver
+4. python manage.py migrate
 
-5. That's it.
+5. python manage.py runserver
+
+6. That's it.
